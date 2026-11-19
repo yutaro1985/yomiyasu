@@ -122,10 +122,12 @@
 - `<<<yomiyasu:` で始まるほかの行（`<<<yomiyasu:materials>>>` のような書き損じ）があれば、check は終了コード2で止まり、何も記録しない。正しい形に直して実行し直す。
 - 出典は記録に残るが、照合しない（出典の中の数は、資料の値として照らされない）。根拠の行頭に `[利用者の発言]` のような札を書かない。札の中の数が資料の値として照らされる。
 
-ファイルを書けないとき（ファイルに保存しないよう頼まれたときを含む）は、抜き書きを `run --stdin` の material の部分に書き、修正後の run にも同じ文を写す。
+抜き書きをファイルにせずに渡すときは、`run --stdin` の material の部分に書き、修正後の run にも同じ文を渡す。
+保存を禁止され、検査中の一時ファイルは許されている場合は、次の例のように `--no-record` を付ける。記録が残らないため `verify` は行わない。
+一時ファイルも禁止されている場合は、check を実行しない。
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/yomiyasu_check.py run --stdin --fact-gaps <<'YOMIYASU_EOF'
+python3 ${CLAUDE_SKILL_DIR}/scripts/yomiyasu_check.py run --stdin --no-record --fact-gaps <<'YOMIYASU_EOF'
 <<<yomiyasu:original>>>
 （原文）
 <<<yomiyasu:material 利用者の発言>>>
