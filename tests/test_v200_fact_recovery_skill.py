@@ -288,6 +288,8 @@ class TestReferenceExamplesMatchCheck(FactRecoveryCase):
         self.assertEqual([source.get("label") for source in data["materials"]["sources"] if source["role"] == "material"],
                          ["利用者の発言"])
         self.assertIsNotNone(data.get("fact_gaps"))
+        self.assertEqual(data["status"], "unrecorded")
+        self.assertFalse((self.root / "state").exists())
 
 
 class TestFactGapsList(unittest.TestCase):
